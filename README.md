@@ -38,3 +38,5 @@ scikit-learn==1.3.2
 plotly==5.18.0
 beautifulsoup4==4.12.2
 """
+
+![Alt text](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/main/S%20chatbox%20home.png?raw=true)
