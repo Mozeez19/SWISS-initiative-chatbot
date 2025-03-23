@@ -46,8 +46,20 @@ beautifulsoup4==4.12.2
 ## TO DOs
 
 ## UI
+
+# must
 - [ ] Fix the dropdown menu
 - [ ] fix the textfield to always go below the generated responses
 - [ ] Branding
 - [ ] change the Initiative database tab
-- [ ] Data_fetcher 
+
+# Should
+- [ ] Update the statistic tab or merge it with the other tabs
+
+# could
+- [ ] Change Interface elements like color 
+
+## Data_fetch
+- [ ] Update the data fetch function
+- [ ] Scrape more detailed information
+
