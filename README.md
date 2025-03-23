@@ -46,8 +46,8 @@ beautifulsoup4==4.12.2
 ## TO DOs
 
 ## UI
-[ ] Fix the dropdown menu
--[ ] fix the textfield to always go below the generated responses
--[ ] Branding
--[ ] change the Initiative database tab
--[ ] Data_fetcher 
+- [ ] Fix the dropdown menu
+- [ ] fix the textfield to always go below the generated responses
+- [ ] Branding
+- [ ] change the Initiative database tab
+- [ ] Data_fetcher 
