@@ -1,4 +1,4 @@
-## Swiss Popular Initiative Chatbot
+# Swiss Popular Initiative Chatbot
 
 A chatbot application that provides information about Swiss popular initiatives. The application fetches data from official sources, processes it, and provides a user-friendly interface for users to ask questions about initiatives.
 
@@ -27,7 +27,7 @@ After launching the application, you can:
 The application fetches data from the Swiss Federal Chancellery API.
 """
 
-# requirements.txt
+## requirements.txt
 """
 streamlit==1.30.0
 pandas==2.1.4
@@ -43,23 +43,23 @@ beautifulsoup4==4.12.2
 ![Alt text](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/main/S%20chatbox%20home2.png?raw=true)
 ![Alt text](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/main/S%20chatbox%20init_list.png?raw=true)
 
-## TO DOs
+# TO DOs
 
 ## UI
 
-# must
+### must
 - [ ] Fix the dropdown menu
 - [ ] fix the textfield to always go below the generated responses
 - [ ] Branding
 - [ ] change the Initiative database tab
 
-# Should
+### Should
 - [ ] Update the statistic tab or merge it with the other tabs
 
-# could
+### could
 - [ ] Change Interface elements like color 
 
-## Data_fetch
+### Data_fetch
 - [ ] Update the data fetch function
 - [ ] Scrape more detailed information
 
