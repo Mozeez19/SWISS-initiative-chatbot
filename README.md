@@ -28,7 +28,6 @@ The application fetches data from the Swiss Federal Chancellery API.
 """
 
 ## requirements.txt
-"""
 streamlit==1.30.0
 pandas==2.1.4
 requests==2.31.0
@@ -37,13 +36,12 @@ nltk==3.8.1
 scikit-learn==1.3.2
 plotly==5.18.0
 beautifulsoup4==4.12.2
-"""
 
 ![Alt text](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/main/S%20chatbox%20home.png?raw=true)
 ![Alt text](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/main/S%20chatbox%20home2.png?raw=true)
 ![Alt text](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/main/S%20chatbox%20init_list.png?raw=true)
 
-# TO DOs
+# TO DO
 
 ## UI
 
@@ -59,7 +57,7 @@ beautifulsoup4==4.12.2
 ### could
 - [ ] Change Interface elements like color 
 
-### Data_fetch
+## Data_fetch
 - [ ] Update the data fetch function
 - [ ] Scrape more detailed information
 
