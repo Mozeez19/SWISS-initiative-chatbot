@@ -1,17 +1,9 @@
 # src/chatbot.py
-# !/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""
-Chatbot Module
-
-This module implements the chatbot functionality for answering questions
-about Swiss popular initiatives.
-"""
 
 import re
 import random
 from data.data_processor import DataProcessor
+from summarize_initiative import summarize_initiative
 
 
 class Chatbot:
@@ -49,12 +41,6 @@ class Chatbot:
     def get_response(self, user_input):
         """
         Generate a response to user input.
-
-        Args:
-            user_input (str): User's message
-
-        Returns:
-            str: Chatbot's response
         """
         user_input = user_input.lower()
 
@@ -80,28 +66,26 @@ class Chatbot:
         if search_results:
             response = "Here's what I found related to your query:\n\n"
             for i, result in enumerate(search_results, 1):
+                summary = summarize_initiative(result)
                 response += f"{i}. **{result.get('title', 'Untitled Initiative')}**\n"
                 response += f"   Status: {result.get('status', 'Unknown')}\n"
                 if 'description' in result and result['description']:
                     response += f"   {result.get('description')}\n"
-                response += "\n"
+                response += f"   **Summary**: {summary}\n\n"
             response += "Would you like more details about any of these initiatives?"
             return response
 
         return random.choice(self.fallback_responses)
 
     def _is_greeting(self, text):
-        """Check if text is a greeting."""
         greetings = ['hello', 'hi', 'hey', 'grüezi', 'bonjour', 'buongiorno', 'greetings']
         return any(greeting in text for greeting in greetings)
 
     def _is_farewell(self, text):
-        """Check if text is a farewell."""
         farewells = ['bye', 'goodbye', 'auf wiedersehen', 'au revoir', 'arrivederci', 'ciao', 'see you']
         return any(farewell in text for farewell in farewells)
 
     def _check_initiative_specific_question(self, text):
-        """Check if the question is about a specific initiative."""
         patterns = [
             r'(tell|talk|know|information).+about\s+(.+)',
             r'what (is|was|are|were)\s+(.+)',
@@ -114,11 +98,11 @@ class Chatbot:
                 initiative_name = match.group(2) if len(match.groups()) > 1 else match.group(1)
                 initiative = self.data_fetcher.get_initiative_by_title(initiative_name)
                 if initiative:
-                    return self._format_initiative_details(initiative)
+                    summary = summarize_initiative(initiative)
+                    return self._format_initiative_details(initiative, summary)
         return None
 
-    def _format_initiative_details(self, initiative):
-        """Format initiative details into a readable response."""
+    def _format_initiative_details(self, initiative, summary):
         response = f"**{initiative.get('title', 'Untitled Initiative')}**\n\n"
 
         if 'submission_date' in initiative:
@@ -130,10 +114,10 @@ class Chatbot:
         if 'description' in initiative and initiative['description']:
             response += f"\n**Description**:\n{initiative['description']}\n"
 
+        response += f"\n**Summary**: {summary}\n"
         return response
 
     def _check_process_question(self, text):
-        """Check if the question is about the initiative process."""
         process_keywords = ['how does an initiative work', 'what is a popular initiative', 'process', 'requirements',
                             'how many signatures', 'timeline']
         if any(re.search(keyword, text) for keyword in process_keywords):
@@ -150,7 +134,6 @@ class Chatbot:
         return None
 
     def _check_statistics_question(self, text):
-        """Check if the question is about statistics."""
         stats_keywords = ['statistics', 'how many initiatives', 'success rate', 'percentage', 'numbers', 'data',
                           'figures']
         if any(keyword in text for keyword in stats_keywords):
