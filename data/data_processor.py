@@ -7,6 +7,7 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
 class DataProcessor:
     """
     Class to process and prepare Swiss initiative data for the chatbot.
@@ -24,7 +25,7 @@ class DataProcessor:
         self.vectorizer = None
         self.tfidf_matrix = None
 
-        # Download NLTK resources if needed
+        # Download NLTK resources if needed.
         try:
             nltk.data.find('tokenizers/punkt')
             nltk.data.find('corpora/stopwords')
@@ -44,41 +45,42 @@ class DataProcessor:
         if not initiatives:
             raise ValueError("No initiatives data found.")
 
-        # Convert to DataFrame
+        # Convert list of initiatives (dicts) to a DataFrame
         self.initiatives_df = pd.DataFrame(initiatives)
 
-        # Debug: Show sample data
+        # Debug: Show sample data (remove or comment these out in production)
         print(f"Loaded {len(self.initiatives_df)} initiatives.")
         print("Sample row:", self.initiatives_df.iloc[0].to_dict())
 
-        # Build a text corpus by combining multiple fields available from the data
+        # Build a text corpus by combining multiple fields.
+        # Adjust field names if necessary. Here we assume full_text, title, status, result, preliminary_review,
+        # and submitted_on (or submission_date) are provided by your DataFetcher.
         self.initiatives_df['text_corpus'] = self.initiatives_df.apply(
             lambda row: ' '.join(filter(None, [
                 str(row.get('title', '')).strip(),
                 str(row.get('status', '')).strip(),
                 str(row.get('result', '')).strip(),
                 str(row.get('preliminary_review', '')).strip(),
-                str(row.get('submitted_on', '')).strip(),
-                str(row.get('full_text', '')).strip()  # Add full_text to the corpus
+                str(row.get('submitted_on', row.get('submission_date', ''))).strip(),
+                str(row.get('full_text', '')).strip()  # Include full_text for better search context
             ])),
             axis=1
         )
 
-        # Clean up the texts
+        # Clean the text corpus: drop empty strings.
         texts = self.initiatives_df['text_corpus'].fillna('').astype(str)
         texts = texts[texts.str.strip() != '']
 
-        # Fallback: Use only titles if the combined text is empty
+        # Fallback: Use only the title if the combined text is empty.
         if texts.empty:
             print("⚠️ Empty TF-IDF input. Falling back to using titles only.")
             self.initiatives_df['text_corpus'] = self.initiatives_df['title'].fillna('').astype(str)
             texts = self.initiatives_df['text_corpus'].fillna('').astype(str)
             texts = texts[texts.str.strip() != '']
-
             if texts.empty:
                 raise ValueError("No valid text data even from titles. Cannot proceed.")
 
-        # Initialize TF-IDF vectorizer with custom preprocessing
+        # Initialize the TF-IDF vectorizer with custom preprocessing.
         self.vectorizer = TfidfVectorizer(
             tokenizer=self._preprocess_text,
             stop_words=stopwords.words('english') +
@@ -87,7 +89,7 @@ class DataProcessor:
                        stopwords.words('italian')
         )
 
-        # Fit the vectorizer to the text corpus
+        # Fit the vectorizer to the text corpus.
         self.tfidf_matrix = self.vectorizer.fit_transform(texts)
 
     def _preprocess_text(self, text):
@@ -95,10 +97,10 @@ class DataProcessor:
         Preprocess text for better search results.
 
         Args:
-            text (str): Text to preprocess
+            text (str): Text to preprocess.
 
         Returns:
-            list: List of preprocessed tokens
+            list: List of tokens.
         """
         text = text.lower()
         text = re.sub(r'[^\w\s]', ' ', text)
@@ -110,11 +112,11 @@ class DataProcessor:
         Search initiatives based on a query.
 
         Args:
-            query (str): Search query
-            top_n (int): Number of top results to return
+            query (str): Search query.
+            top_n (int): Number of top results to return.
 
         Returns:
-            list: List of matching initiatives
+            list: List of matching initiatives as dictionaries.
         """
         query_vector = self.vectorizer.transform([query])
         similarity_scores = cosine_similarity(query_vector, self.tfidf_matrix).flatten()
@@ -132,10 +134,10 @@ class DataProcessor:
         Get detailed information about a specific initiative.
 
         Args:
-            initiative_title (str): Title of the initiative
+            initiative_title (str): Title of the initiative.
 
         Returns:
-            dict: Initiative details
+            dict: Initiative details.
         """
         return self.data_fetcher.get_initiative_by_title(initiative_title)
 
@@ -144,7 +146,7 @@ class DataProcessor:
         Get processed statistics data for visualization.
 
         Returns:
-            dict: Processed statistics
+            dict: Processed statistics.
         """
         stats = self.data_fetcher.get_statistics()
 
@@ -170,9 +172,9 @@ class DataProcessor:
         Get initiatives by category.
 
         Args:
-            category (str): Category to filter by (e.g., 'Restaurant', 'Hotel')
+            category (str): Category to filter by (e.g., 'Restaurant', 'Hotel').
 
         Returns:
-            list: Initiatives filtered by category
+            list: List of initiatives filtered by category.
         """
         return [i for i in self.data_fetcher.get_all_initiatives() if category.lower() in i.get('category', '').lower()]

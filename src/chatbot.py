@@ -1,10 +1,8 @@
-# src/chatbot.py
-
 import re
 import random
+import difflib  # Standard library for fuzzy matching
 from data.data_processor import DataProcessor
 from summarize_initiative import summarize_initiative
-
 
 class Chatbot:
     """
@@ -86,21 +84,48 @@ class Chatbot:
         return any(farewell in text for farewell in farewells)
 
     def _check_initiative_specific_question(self, text):
+        """
+        Checks if the query is about a specific initiative. Uses regex patterns to extract
+        a candidate name and then, using fuzzy matching, returns the best match.
+        """
         patterns = [
             r'(tell|talk|know|information).+about\s+(.+)',
             r'what (is|was|are|were)\s+(.+)',
             r'details\s+(?:on|about)\s+(.+)'
         ]
 
+        candidate = None
+        # Try to extract candidate initiative name from the query
         for pattern in patterns:
-            match = re.search(pattern, text)
+            match = re.search(pattern, text, re.IGNORECASE)
             if match:
-                initiative_name = match.group(2) if len(match.groups()) > 1 else match.group(1)
-                initiative = self.data_fetcher.get_initiative_by_title(initiative_name)
-                if initiative:
-                    summary = summarize_initiative(initiative)
-                    return self._format_initiative_details(initiative, summary)
-        return None
+                candidate = match.group(2) if match.lastindex >= 2 and match.group(2) else match.group(1)
+                break
+
+        if not candidate:
+            return None
+
+        # Use the search function to get a list of candidate initiatives
+        results = self.data_processor.search_initiatives(candidate, top_n=5)
+        if not results:
+            return None
+
+        # Use difflib to compute similarity ratios and pick the best match.
+        best_match = None
+        best_score = 0.0
+        for initiative in results:
+            title = initiative.get("title", "")
+            score = difflib.SequenceMatcher(None, candidate.lower(), title.lower()).ratio()
+            if score > best_score:
+                best_score = score
+                best_match = initiative
+
+        # If best match found above threshold (say, 0.5), return its detailed information.
+        if best_match and best_score > 0.5:
+            summary = summarize_initiative(best_match)
+            return self._format_initiative_details(best_match, summary)
+        else:
+            return None
 
     def _format_initiative_details(self, initiative, summary):
         response = f"**{initiative.get('title', 'Untitled Initiative')}**\n\n"
@@ -120,30 +145,30 @@ class Chatbot:
     def _check_process_question(self, text):
         process_keywords = ['how does an initiative work', 'what is a popular initiative', 'process', 'requirements',
                             'how many signatures', 'timeline']
-        if any(re.search(keyword, text) for keyword in process_keywords):
-            return """
-            **Swiss Popular Initiative Process**
-
-            1. **Formation of a committee**: 7-27 Swiss citizens form a committee.
-            2. **Submission of text**: Initiative text is submitted for validation.
-            3. **Collection of signatures**: 100,000 valid signatures within 18 months.
-            4. **Validation**: The government verifies the signatures.
-            5. **Parliament Review**: Parliament debates the initiative.
-            6. **Popular Vote**: Requires majority votes from people & cantons.
-            """
+        if any(re.search(keyword, text, re.IGNORECASE) for keyword in process_keywords):
+            return (
+                "**Swiss Popular Initiative Process**\n\n"
+                "1. **Formation of a committee**: 7-27 Swiss citizens form a committee.\n"
+                "2. **Submission of text**: Initiative text is submitted for validation.\n"
+                "3. **Collection of signatures**: 100,000 valid signatures within 18 months.\n"
+                "4. **Validation**: The government verifies the signatures.\n"
+                "5. **Parliament Review**: Parliament debates the initiative.\n"
+                "6. **Popular Vote**: Requires majority votes from people & cantons.\n"
+            )
         return None
 
     def _check_statistics_question(self, text):
-        stats_keywords = ['statistics', 'how many initiatives', 'success rate', 'percentage', 'numbers', 'data',
-                          'figures']
+        stats_keywords = ['statistics', 'how many initiatives', 'success rate', 'percentage', 'numbers', 'data', 'figures']
         if any(keyword in text for keyword in stats_keywords):
             stats = self.data_fetcher.get_statistics()
             response = f"**Total initiatives**: {stats.get('total', 0)}\n\n"
             if 'by_status' in stats:
                 response += "**By status**:\n" + "\n".join(
-                    [f"- {k}: {v}" for k, v in stats['by_status'].items()]) + "\n\n"
+                    [f"- {k}: {v}" for k, v in stats['by_status'].items()]
+                ) + "\n\n"
             if 'by_result' in stats:
                 response += "**By result**:\n" + "\n".join(
-                    [f"- {k}: {v}" for k, v in stats['by_result'].items()]) + "\n\n"
+                    [f"- {k}: {v}" for k, v in stats['by_result'].items()]
+                ) + "\n\n"
             return response
         return None
