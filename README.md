@@ -81,8 +81,7 @@ Once the app is running, open your browser to the Streamlit interface. You can a
 The chatbot will return:
 
 - A summary of the initiative  
-- Key dates and metadata  
-- Relevant sentiment and reactions (if available)  
+- Key dates and metadata   
 - Direct links to official documentation  
 
 
@@ -125,3 +124,5 @@ Here are a few snapshots of the app in action:
 
 ## 📄 To do 
  - [ ] Add Relevant sentiment and reactions
+ - [ ] Update UI
+ - [ ] Fix the database Tab
