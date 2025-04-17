@@ -58,8 +58,9 @@ To get started with the chatbot locally:
  8. tuyuy
  9. 
 ## 🗂️ Project Structure
- ```bash
- swiss-initiative-chatbot/
+Important structure of the project
+    ```bash
+    swiss-initiative-chatbot/
 ├── data/                        # Raw and processed data
 ├── src/
 │   ├── chatbot.py               # Chatbot logic and response handling
@@ -73,18 +74,42 @@ To get started with the chatbot locally:
 
 
 ## 🧪 Usage
+
 Once the app is running, open your browser to the Streamlit interface. You can ask questions like:
 
-"What is the initiative on pension reform?"
-"When was the initiative on CO2 emissions submitted?"
-"What was the outcome of the initiative on food security?"
+- "What is the initiative on pension reform?"  
+- "When was the initiative on CO2 emissions submitted?"  
+- "What was the outcome of the initiative on food security?"
 
 The chatbot will return:
 
-A summary of the initiative
+- A summary of the initiative  
+- Key dates and metadata  
+- Relevant sentiment and reactions (if available)  
+- Direct links to official documentation  
 
-Key dates and metadata
+---
 
-Relevant sentiment and reactions (if available)
+## 🙌 Contributing
 
-Direct links to official documentation
+Pull requests and issues are welcome! If you'd like to contribute:
+
+1. Fork the repo  
+2. Create a new branch (`git checkout -b feature-name`)  
+3. Commit your changes  
+4. Push and open a PR  
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See `LICENSE` for more info.
+
+---
+
+## ❤️ Acknowledgements
+
+- **Swiss Confederation** for public access to initiative data  
+- **HuggingFace** for transformer models  
+- **OpenAI / Mistral** for LLM APIs  
+- **Streamlit** for rapid UI prototyping
