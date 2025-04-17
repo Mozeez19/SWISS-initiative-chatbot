@@ -115,10 +115,11 @@ Here are a few snapshots of the app in action:
 ### 🤖 Chatbot in Action
 ![Chatbot Demo](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/d37fe29cb2610663096a563c2b054743a22759f7/Screenshot%20(210)%20chatInAct.png)
 
-### 📊 Database Analysis View
+### 💾 Database Tab
 ![Database Tab](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/0f7c0bc38036d81a0dfcfea969dd2fcd2ae13033/Screenshot%20(199)Db.png)
 
-![chart Tab]()
+### 📊 Statistics Tab
+![chart Tab](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/183626878f2401a03da6495229032615b09f2243/Screenshot%20(200)chart.png)
 
 
 
