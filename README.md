@@ -113,10 +113,10 @@ Here are a few snapshots of the app in action:
 ![](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/1b5e71dd567ce9b251ad2453e8f5cbc1db0e397b/Screenshot%20(209)3.png)
 
 ### 🤖 Chatbot in Action
-![Chatbot Demo]([images/chatbot-demo.png](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/1b5e71dd567ce9b251ad2453e8f5cbc1db0e397b/Screenshot%20(210)chatInAct.png))
+![Chatbot Demo](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/d37fe29cb2610663096a563c2b054743a22759f7/Screenshot%20(210)%20chatInAct.png)
 
-### 📊 Sentiment Analysis View
-![Sentiment Analysis](images/sentiment.png)
+### 📊 Database Analysis View
+![Database Tab](images/sentiment.png)
 
 
 
