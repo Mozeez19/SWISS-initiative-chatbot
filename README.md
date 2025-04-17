@@ -43,18 +43,20 @@ To get started with the chatbot locally:
    
  2. **Create and activate a virtual environment**
     ```bash
-   python -m venv venv
-   source venv/bin/activate         # On Windows: venv\Scripts\activate
+    python -m venv venv
+    source venv/bin/activate        # On Windows: venv\Scripts\activate
 
  3. **Install the dependencies**
+    ```bash
     pip install -r requirements.txt
 
- 4. **Run the Streamlit app**
+ 5. **Run the Streamlit app**
+    ```bash
     streamlit run src/ui.py
 
- 6. tytyt
- 7. tuyuy
- 8. 
+ 7. tytyt
+ 8. tuyuy
+ 9. 
 
 python -m venv venv
 source venv/bin/activate         # On Windows: venv\Scripts\activate
