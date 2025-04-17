@@ -54,7 +54,7 @@ class DataProcessor:
 
         # Build a text corpus by combining multiple fields.
         # Adjust field names if necessary. Here we assume full_text, title, status, result, preliminary_review,
-        # and submitted_on (or submission_date) are provided by your DataFetcher.
+        # and submitted_on (or submission_date) are provided by DataFetcher.
         self.initiatives_df['text_corpus'] = self.initiatives_df.apply(
             lambda row: ' '.join(filter(None, [
                 str(row.get('title', '')).strip(),

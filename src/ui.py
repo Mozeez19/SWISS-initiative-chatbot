@@ -61,22 +61,6 @@ class UI:
     def _render_chat_messages(self):
         st.header("Chat with the Swiss Initiatives Bot")
 
-        if "messages" not in st.session_state:
-            st.session_state.messages = [
-                {
-                    "role": "assistant",
-                    "content": "Hello! I'm your Swiss Initiatives Chatbot. Ask me anything about Swiss initiatives, public reactions, or direct democracy.",
-                }
-            ]
-
-        # Display conversation
-        for message in st.session_state.messages[-20:]:
-            with st.chat_message(message["role"]):
-                st.markdown(message["content"])
-
-    def _render_chat_input(self):
-        st.markdown("---")
-
         col1, col2 = st.columns([1, 4])
         with col1:
             if st.button("🗑️ Clear Chat"):
@@ -89,12 +73,26 @@ class UI:
                 st.rerun()
 
         with col2:
-            use_openai = st.checkbox(
+            st.checkbox(
                 "Use OpenAI Generative Model",
-                value=False,
+                key="use_openai",
+                value=st.session_state.get("use_openai", False),
                 help="Tick this box to generate responses using OpenAI's GPT models instead of the built-in chatbot logic.",
             )
 
+        if "messages" not in st.session_state:
+            st.session_state.messages = [
+                {
+                    "role": "assistant",
+                    "content": "Hello! I'm your Swiss Initiatives Chatbot. Ask me anything about Swiss initiatives, public reactions, or direct democracy.",
+                }
+            ]
+
+        for message in st.session_state.messages[-20:]:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+
+    def _render_chat_input(self):
         prompt = st.chat_input("Ask a question about Swiss initiatives...")
         if prompt:
             st.session_state.messages.append({"role": "user", "content": prompt})
@@ -103,10 +101,14 @@ class UI:
 
             with st.chat_message("assistant"):
                 try:
-                    if use_openai:
+                    if st.session_state.get("use_openai", False):
                         response = ask_openai(st.session_state.messages)
                     else:
-                        response = self.chatbot.get_response(prompt)
+                        result = self.chatbot.get_response(prompt)
+                        if isinstance(result, tuple):
+                            initiative, response = result
+                        else:
+                            response = result
                 except Exception as e:
                     response = f"⚠️ Error calling chatbot: {e}"
                 st.markdown(response)
@@ -200,6 +202,7 @@ class UI:
                 title='Distribution of Initiative Statuses'
             )
             st.plotly_chart(fig)
+
 
 
 
