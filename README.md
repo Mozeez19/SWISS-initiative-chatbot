@@ -106,7 +106,7 @@ The chatbot will return:
 Here are a few snapshots of the app in action:
 
 ### 🏠 Home Page
-![Home Screen](images/home.png)
+![Home Screen]([images/home.png](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/daafb240515ab270d1dcde48edcaeb0d03f1b40e/Screenshot%20(210)%20chatInAct.png))
 
 ### 🤖 Chatbot in Action
 ![Chatbot Demo](images/chatbot-demo.png)
