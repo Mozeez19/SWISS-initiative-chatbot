@@ -54,23 +54,20 @@ To get started with the chatbot locally:
     ```bash
     streamlit run src/main.py
 
- 7. tytyt
- 8. tuyuy
- 9. 
 ## 🗂️ Project Structure
 Important structure of the project
     ```bash
-    swiss-initiative-chatbot/
-├── data/                        # Raw and processed data
-├── src/
-│   ├── chatbot.py               # Chatbot logic and response handling
-│   ├── data_processor.py        # Initiative scraper and data parser
-│   ├── summarizer.py            # Summarization and keyword extraction
-│   ├── opinion_analyzer.py      # Sentiment and public reaction analyzer
-│   └── ui.py                    # Streamlit-based user interface
-├── summarized_initiatives.json # Cached summaries of initiatives
-├── requirements.txt
-└── README.md
+       swiss-initiative-chatbot/
+         ├── data/                        # Raw and processed data
+         ├── src/
+         │   ├── chatbot.py               # Chatbot logic and response handling
+         │   ├── data_processor.py        # Initiative scraper and data parser
+         │   ├── summarizer.py            # Summarization and keyword extraction
+         │   ├── opinion_analyzer.py      # Sentiment and public reaction analyzer
+         │   └── ui.py                    # Streamlit-based user interface
+         ├── summarized_initiatives.json # Cached summaries of initiatives
+         ├── requirements.txt
+         └── README.md
 
 
 ## 🧪 Usage
@@ -88,22 +85,12 @@ The chatbot will return:
 - Relevant sentiment and reactions (if available)  
 - Direct links to official documentation  
 
----
-
-## 🙌 Contributing
-
-Pull requests and issues are welcome! If you'd like to contribute:
-
-1. Fork the repo  
-2. Create a new branch (`git checkout -b feature-name`)  
-3. Commit your changes  
-4. Push and open a PR  
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License. See `LICENSE` for more info.
+
 
 ---
 
@@ -113,3 +100,6 @@ This project is licensed under the MIT License. See `LICENSE` for more info.
 - **HuggingFace** for transformer models  
 - **OpenAI / Mistral** for LLM APIs  
 - **Streamlit** for rapid UI prototyping
+
+## 📄 To do 
+ - [ ] Add Relevant sentiment and reactions
