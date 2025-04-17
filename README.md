@@ -1,4 +1,4 @@
-# 🇨🇭 Swiss Popular Initiative Chatbot
+# 🇨🇭 Swiss Popular Initiative Chatbot :robot:
 
 A chatbot application that provides detailed information about Swiss popular initiatives. The application fetches data from official government sources, processes it intelligently, and offers a user-friendly interface where users can ask questions about specific initiatives and get relevant insights.
 
@@ -100,6 +100,21 @@ The chatbot will return:
 - **HuggingFace** for transformer models  
 - **OpenAI / Mistral** for LLM APIs  
 - **Streamlit** for rapid UI prototyping
+
+## 📸 Screenshots
+
+Here are a few snapshots of the app in action:
+
+### 🏠 Home Page
+![Home Screen](images/home.png)
+
+### 🤖 Chatbot in Action
+![Chatbot Demo](images/chatbot-demo.png)
+
+### 📊 Sentiment Analysis View
+![Sentiment Analysis](images/sentiment.png)
+
+
 
 ## 📄 To do 
  - [ ] Add Relevant sentiment and reactions
