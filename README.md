@@ -71,3 +71,20 @@ To get started with the chatbot locally:
 ├── requirements.txt
 └── README.md
 
+
+## 🧪 Usage
+Once the app is running, open your browser to the Streamlit interface. You can ask questions like:
+
+"What is the initiative on pension reform?"
+"When was the initiative on CO2 emissions submitted?"
+"What was the outcome of the initiative on food security?"
+
+The chatbot will return:
+
+A summary of the initiative
+
+Key dates and metadata
+
+Relevant sentiment and reactions (if available)
+
+Direct links to official documentation
