@@ -13,7 +13,7 @@ A chatbot application that provides detailed information about Swiss popular ini
 - [x] Interactive UI built with Streamlit
 - [x] Search and similarity matching with fuzzy logic
 
-![mechanism ](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/e99ff65205f90fdccccaf6e8a74aac1ad40e7c94/Screenshot%20(206)1.png)
+![mechanism ](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/87aba30947990274709c263b6ef87bf09f462d8d/Web%20scrape.png)
 
 ---
 
