@@ -40,3 +40,21 @@ To get started with the chatbot locally:
    ```bash
    git clone https://github.com/yourusername/swiss-initiative-chatbot.git
    cd swiss-initiative-chatbot
+   
+ 2. **Create and activate a virtual environment**
+    ```bash
+   python -m venv venv
+   source venv/bin/activate         # On Windows: venv\Scripts\activate
+
+ 3. **Install the dependencies**
+    pip install -r requirements.txt
+
+ 4. **Run the Streamlit app**
+    streamlit run src/ui.py
+
+ 6. tytyt
+ 7. tuyuy
+ 8. 
+
+python -m venv venv
+source venv/bin/activate         # On Windows: venv\Scripts\activate
