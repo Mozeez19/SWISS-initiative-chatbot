@@ -6,12 +6,14 @@ A chatbot application that provides detailed information about Swiss popular ini
 
 ## 🧠 Features
 
-- Retrieves metadata and full texts from Swiss federal initiative pages
-- Uses NLP and LLMs to summarize initiatives and extract keywords
-- Answers user questions via a smart chatbot interface
-- Displays public sentiment using scraped data from online sources
-- Interactive UI built with Streamlit
-- Search and similarity matching with fuzzy logic
+- [x] Retrieves metadata and full texts from Swiss federal initiative pages
+- [x] Uses NLP and LLMs to summarize initiatives and extract keywords
+- [x] Answers user questions via a smart chatbot interface
+- [ ] Displays public sentiment using scraped data from online sources
+- [x] Interactive UI built with Streamlit
+- [x] Search and similarity matching with fuzzy logic
+
+![mechanism ](https://github.com/Mozeez19/SWISS-initiative-chatbot/blob/e99ff65205f90fdccccaf6e8a74aac1ad40e7c94/Screenshot%20(206)1.png)
 
 ---
 
