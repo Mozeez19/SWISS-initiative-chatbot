@@ -52,11 +52,22 @@ To get started with the chatbot locally:
 
  5. **Run the Streamlit app**
     ```bash
-    streamlit run src/ui.py
+    streamlit run src/main.py
 
  7. tytyt
  8. tuyuy
  9. 
+## 🗂️ Project Structure
+ ```bash
+ swiss-initiative-chatbot/
+├── data/                        # Raw and processed data
+├── src/
+│   ├── chatbot.py               # Chatbot logic and response handling
+│   ├── data_processor.py        # Initiative scraper and data parser
+│   ├── summarizer.py            # Summarization and keyword extraction
+│   ├── opinion_analyzer.py      # Sentiment and public reaction analyzer
+│   └── ui.py                    # Streamlit-based user interface
+├── summarized_initiatives.json # Cached summaries of initiatives
+├── requirements.txt
+└── README.md
 
-python -m venv venv
-source venv/bin/activate         # On Windows: venv\Scripts\activate
